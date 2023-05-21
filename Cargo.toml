@@ -7,3 +7,11 @@ edition = "2021"
 
 [dependencies]
 bevy = { version = "0.10" }
+leafwing-input-manager = "0.9"
+bevy_proto = "0.10"
+iyes_progress = "0.8"
+bevy_ecs_markers = "1"
+spew = "0.2"
+bevy_common_assets = "0.6.0"
+bevy_asset_loader = "0.16"
+bevy_dolly = { git = "https://github.com/BlackPhlox/bevy_dolly", features = ["drivers"] }
