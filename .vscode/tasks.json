@@ -1,0 +1,32 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run",
+            "type": "shell",
+            "command": "cargo run"
+        },
+        {
+            "label": "Watch",
+            "type": "shell",
+            "command": "cargo watch -d 2 -x run"
+        },
+        {
+            "label": "Run Wasm",
+            "type": "shell",
+            "options": {
+                "env": {
+                    "WASM_SERVER_RUNNER_ADDRESS": "0.0.0.0:1334"
+                }
+            },
+            "command": "cargo run --target wasm32-unknown-unknown"
+        },
+        {
+            "label": "Format",
+            "type": "shell",
+            "command": "cargo clippy --fix --allow-dirty & cargo fmt"
+        }
+    ]
+}

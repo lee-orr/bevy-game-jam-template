@@ -1,0 +1,20 @@
+{
+    "VsCodeTaskButtons.tasks": [
+        {
+            "label": "Run",
+            "task": "Run"
+        },
+        {
+            "label": "Watch",
+            "task": "Watch"
+        },
+        {
+            "label": "Run Wasm",
+            "task": "Run Wasm"
+        },
+        {
+            "label": "Format",
+            "task": "Format"
+        }
+    ]
+}
