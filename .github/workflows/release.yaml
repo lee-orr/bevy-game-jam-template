@@ -11,6 +11,11 @@ env:
   add_binaries_to_github_release: true
   itch_target: lee-orr/philosophical-zombies
 
+concurrency:
+  group: release
+  cancel-in-progress: true
+
+
 jobs:
   # Build for wasm
   release-wasm:
