@@ -118,7 +118,3 @@ pub fn span(b: &mut dyn IntermediaryNodeBundleHandler) {
     b.style().justify_content = JustifyContent::FlexStart;
     b.style().align_items = AlignItems::Center;
 }
-
-pub fn centered(b: &mut dyn IntermediaryNodeBundleHandler) {
-    b.style().justify_content = JustifyContent::Center;
-}
