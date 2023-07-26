@@ -21,7 +21,7 @@ jobs:
       binary: ${{ steps.setup-build-name.outputs.binary-inner }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: |
           NAME=$( sed -n 's/^name = "\(.*\)"/\1/p' < ./Cargo.toml )
           echo "binary: $NAME"
@@ -36,7 +36,7 @@ jobs:
       - run: |
           echo "Binary is  ${{ needs.setup-build-name.outputs.binary}}"
           [ -z " ${{ needs.setup-build-name.outputs.binary}}" ] && exit 1 || exit 0
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -97,7 +97,7 @@ jobs:
       - run: |
           echo "Binary is  ${{ needs.setup-build-name.outputs.binary}}"
           [ -z " ${{ needs.setup-build-name.outputs.binary}}" ] && exit 1 || exit 0
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -147,7 +147,7 @@ jobs:
       - run: |
           echo "Binary is  ${{ needs.setup-build-name.outputs.binary}}"
           [ -z " ${{ needs.setup-build-name.outputs.binary}}" ] && exit 1 || exit 0
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -193,7 +193,7 @@ jobs:
       - run: |
           echo "Binary is  ${{ needs.setup-build-name.outputs.binary}}"
           [ -z " ${{ needs.setup-build-name.outputs.binary}}" ] && exit 1 || exit 0
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
