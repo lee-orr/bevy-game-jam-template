@@ -6,9 +6,7 @@ use bevy_inspector_egui::{prelude::ReflectInspectorOptions, InspectorOptions};
 pub enum GameState {
     #[default]
     None,
-    WorldMap,
-    Mission,
-    Encounter,
+    InGame,
     Failed,
     Complete,
 }

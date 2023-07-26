@@ -11,6 +11,8 @@ use crate::{
         intermediary_node_bundles::*,
     },
 };
+
+use super::game_title;
 pub struct MainMenuPlugin;
 
 impl Plugin for MainMenuPlugin {
@@ -39,17 +41,9 @@ fn setup(mut commands: Commands, _assets: Res<MainGameAssets>, asset_server: Res
     let mut start_button = None;
     let mut credits_button = None;
 
-    let r = root(c_root, &asset_server, &mut commands, |p| {
+    let r = root((c_root, opaque.nb()), &asset_server, &mut commands, |p| {
         node(primary_box, p, |p| {
-            node((span.nb(), primary_box_main.nb(), centered.nb()), p, |p| {
-                text(
-                    "The Just",
-                    (),
-                    (main_text, knight_text, knight_text_color),
-                    p,
-                );
-                text("Two", (), (main_text, druid_text, druid_text_color), p);
-            });
+            game_title::game_title(p);
             focus_text_button(
                 "Start Game",
                 (c_button.nb(), primary_box_item.nb()),

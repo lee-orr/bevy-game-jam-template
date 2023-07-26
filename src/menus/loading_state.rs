@@ -26,10 +26,9 @@ fn draw_loading(mut painter: ShapePainter, time: Res<Time>) {
     let left_edge = (NUM_CIRCLES as f32 * LOADING_ANIMATION_SIZE) / -2.;
 
     for (circle, color) in [
-        colors::KNIGHTS_MAIN,
-        colors::DRUIDS_MAIN,
-        colors::KNIGHTS_SECONDARY,
-        colors::DRUIDS_SECONDARY,
+        colors::PRIMARY_COLOR,
+        colors::PRIMARY_COLOR,
+        colors::PRIMARY_COLOR,
     ]
     .iter()
     .enumerate()

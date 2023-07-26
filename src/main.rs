@@ -1,7 +1,6 @@
 mod app_state;
 mod assets;
 mod in_game;
-mod materialized_scene;
 mod menus;
 mod toon_material;
 mod ui;
@@ -24,10 +23,9 @@ use bevy_vector_shapes::Shape2dPlugin;
 use credits::CreditsPlugin;
 use in_game::InGamePlugin;
 use loading_state::LoadingScreenPlugin;
-use materialized_scene::SceneSpawnerPlugin;
 use menu::MainMenuPlugin;
 use menus::{credits, loading_state, menu};
-use toon_material::ToonMaterialPlugin;
+
 use ui::{colors::DEFAULT_AMBIENT, UiPlugin};
 
 fn main() {
@@ -57,12 +55,10 @@ fn main() {
         .insert_resource(ClearColor(ui::colors::SCREEN_BACKGROUND_COLOR))
         .insert_resource(DEFAULT_AMBIENT)
         .add_plugins((
-            ToonMaterialPlugin,
             LoadingScreenPlugin,
             MainMenuPlugin,
             CreditsPlugin,
             InGamePlugin,
-            SceneSpawnerPlugin,
             MainGameAssetPlugin,
             UiPlugin,
         ))

@@ -112,22 +112,6 @@ pub fn standard_text(assets: &AssetServer, t: &mut TextStyle) {
     t.font = assets.load("fonts/AMERSN__.ttf");
 }
 
-pub fn knight_text(assets: &AssetServer, t: &mut TextStyle) {
-    t.font = assets.load("fonts/ENDOR___.ttf");
-}
-
-pub fn druid_text(assets: &AssetServer, t: &mut TextStyle) {
-    t.font = assets.load("fonts/IMMORTAL.ttf");
-}
-
-pub fn knight_text_color(_assets: &AssetServer, t: &mut TextStyle) {
-    t.color = KNIGHTS_MAIN;
-}
-
-pub fn druid_text_color(_assets: &AssetServer, t: &mut TextStyle) {
-    t.color = DRUIDS_MAIN;
-}
-
 pub fn span(b: &mut dyn IntermediaryNodeBundleHandler) {
     b.style().display = Display::Flex;
     b.style().flex_direction = FlexDirection::Row;
@@ -137,13 +121,4 @@ pub fn span(b: &mut dyn IntermediaryNodeBundleHandler) {
 
 pub fn centered(b: &mut dyn IntermediaryNodeBundleHandler) {
     b.style().justify_content = JustifyContent::Center;
-}
-
-pub fn dice_pool_modifier(b: &mut dyn IntermediaryNodeBundleHandler) {
-    b.style().position_type = PositionType::Absolute;
-    b.style().top = Val::Percent(60.);
-    b.style().right = Val::Percent(45.);
-    b.style().width = Val::Percent(50.);
-    b.style().height = Val::Percent(50.);
-    b.z_index(ZIndex::Global(5));
 }

@@ -50,8 +50,8 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     let r = root((overlay, c_root), &asset_server, &mut commands, |p| {
         node(primary_box, p, |p| {
             node((span.nb(), primary_box_main.nb()), p, |p| {
-                text("Game", (), (main_text, knight_text), p);
-                text("Paused", (), (main_text, druid_text), p);
+                text("Game", (), main_text, p);
+                text("Paused", (), main_text, p);
             });
             focus_text_button(
                 "Resume Game",
