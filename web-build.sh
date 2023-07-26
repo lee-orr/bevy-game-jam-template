@@ -10,6 +10,5 @@ wasm-bindgen --out-dir ./dist/ --target web ./target/wasm32-unknown-unknown/rele
 cp index.html ./dist/index.html
 
 sed -i "s/GAME_TITLE/$NAME/" ./dist/index.html
-sed -i "s/module/$NAME/" ./dist/index.html
 
 cp -R ./assets ./dist/assets62
