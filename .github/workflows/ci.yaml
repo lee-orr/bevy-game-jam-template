@@ -38,9 +38,7 @@ jobs:
       - name: Install Dependencies
         run: sudo apt-get update; sudo apt-get install pkg-config libx11-dev libasound2-dev libudev-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev
       - name: Run cargo test
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
+        run: cargo test
 
   # Run cargo clippy -- -D warnings
   clippy_check:
@@ -82,7 +80,4 @@ jobs:
           toolchain: stable
           components: rustfmt
       - name: Run cargo fmt
-        uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --all -- --check
+        run: "cargo fmt --all -- --check"
