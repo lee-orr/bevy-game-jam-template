@@ -18,14 +18,14 @@ concurrency:
 jobs:
   setup-build-name:
     outputs:
-      binary: ${{ steps.setup-build-name.outputs.binary }}
+      binary: ${{ steps.setup-build-name.outputs.binary-inner }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - run: |
           NAME=$( sed -n 's/^name = "\(.*\)"/\1/p' < ./Cargo.toml )
           echo "binary: $NAME"
-          echo "::set-output name=binary::$NAME"
+          echo "::set-output name=binary-inner::$NAME"
 
   # Build for wasm
   release-wasm:
