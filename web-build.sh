@@ -11,4 +11,4 @@ cp index.html ./dist/index.html
 
 sed -i "s/GAME_TITLE/$NAME/" ./dist/index.html
 
-cp -R ./assets ./dist/assets62
+cp -R ./assets ./dist/assets
