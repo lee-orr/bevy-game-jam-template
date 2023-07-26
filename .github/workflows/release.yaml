@@ -25,7 +25,7 @@ jobs:
       - run: |
           NAME=$( sed -n 's/^name = "\(.*\)"/\1/p' < ./Cargo.toml )
           echo "binary: $NAME"
-          echo "::set-output name=binary-inner::$NAME"
+          echo "binary=$NAME" >> $GITHUB_OUTPUT
 
   # Build for wasm
   release-wasm:
@@ -243,9 +243,9 @@ jobs:
       - id: check-env
         run: |
           if [[ -z "$itch_target" ]]; then
-            echo "::set-output name=has-itch-target::no"
+            echo "has-itch-target=no" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=has-itch-target::yes"
+            echo "has-itch-target=yes" >> $GITHUB_OUTPUT
           fi
       - name: validate ref
         run: echo "RELEASE - ${{ env.release_version}}"
