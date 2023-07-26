@@ -36,7 +36,6 @@ jobs:
     steps:
       - run: |
           echo "Binary is  ${{ needs.setup-build-name.outputs.binary}}"
-          [ -z " ${{ needs.setup-build-name.outputs.binary}}" ] && exit 1 || exit 0
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@master
         with:
@@ -97,7 +96,6 @@ jobs:
     steps:
       - run: |
           echo "Binary is  ${{ needs.setup-build-name.outputs.binary}}"
-          [ -z " ${{ needs.setup-build-name.outputs.binary}}" ] && exit 1 || exit 0
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@master
         with:
@@ -147,7 +145,6 @@ jobs:
     steps:
       - run: |
           echo "Binary is  ${{ needs.setup-build-name.outputs.binary}}"
-          [ -z " ${{ needs.setup-build-name.outputs.binary}}" ] && exit 1 || exit 0
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@master
         with:
@@ -192,7 +189,6 @@ jobs:
     steps:
       - run: |
           echo "Binary is  ${{ needs.setup-build-name.outputs.binary}}"
-          [ -z " ${{ needs.setup-build-name.outputs.binary}}" ] && exit 1 || exit 0
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@master
         with:
@@ -238,7 +234,6 @@ jobs:
     steps:
       - run: |
           echo "Binary is  ${{ needs.setup-build-name.outputs.binary}}"
-          [ -z " ${{ needs.setup-build-name.outputs.binary}}" ] && exit 1 || exit 0
       - id: check-env
         run: |
           if [[ -z "$itch_target" ]]; then
