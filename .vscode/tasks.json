@@ -11,7 +11,7 @@
         {
             "label": "Watch",
             "type": "shell",
-            "command": "cargo watch -d 2 -x run"
+            "command": "cargo watch -w ./src -d 2 -x run"
         },
         {
             "label": "Run Wasm",
@@ -21,12 +21,12 @@
                     "WASM_SERVER_RUNNER_ADDRESS": "0.0.0.0:1334"
                 }
             },
-            "command": "cargo run --target wasm32-unknown-unknown"
+            "command": "cargo watch -w ./src -d 2 -s 'cargo run --target wasm32-unknown-unknown'"
         },
         {
             "label": "Format",
             "type": "shell",
-            "command": "cargo clippy --fix --allow-dirty & cargo fmt"
+            "command": "cargo clippy --fix --allow-dirty -- -D warnings; cargo fmt ; echo \"Done Formatting\""
         }
     ]
 }

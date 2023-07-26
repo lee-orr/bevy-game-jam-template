@@ -1,1 +1,1 @@
-# philosophical-zombies
+# Game Template

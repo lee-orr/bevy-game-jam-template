@@ -1,55 +1,116 @@
-use bevy::{prelude::*, sprite::MaterialMesh2dBundle};
-use bevy_proto::prelude::ProtoPlugin;
+mod app_state;
+mod assets;
+mod in_game;
+mod materialized_scene;
+mod menus;
+mod toon_material;
+mod ui;
+
+use std::time::Duration;
+
+use app_state::AppState;
+use assets::{MainGameAssetPlugin, MainGameAssets};
+use bevy::{
+    asset::ChangeWatcher,
+    core_pipeline::{clear_color::ClearColorConfig, tonemapping::Tonemapping},
+    input::common_conditions::input_toggle_active,
+    prelude::*,
+};
+
+use bevy_inspector_egui::quick::{StateInspectorPlugin, WorldInspectorPlugin};
+use bevy_sequential_actions::SequentialActionsPlugin;
+use bevy_turborand::prelude::RngPlugin;
+use bevy_vector_shapes::Shape2dPlugin;
+use credits::CreditsPlugin;
+use in_game::InGamePlugin;
+use loading_state::LoadingScreenPlugin;
+use materialized_scene::SceneSpawnerPlugin;
+use menu::MainMenuPlugin;
+use menus::{credits, loading_state, menu};
+use toon_material::ToonMaterialPlugin;
+use ui::{colors::DEFAULT_AMBIENT, UiPlugin};
 
 fn main() {
+    #[cfg(target_arch = "wasm32")]
+    console_error_panic_hook::set_once();
+
     App::new()
-        .add_plugins(DefaultPlugins)
-        .add_plugin(ProtoPlugin::new())
-        .add_startup_system(setup)
+        .add_plugins((
+            DefaultPlugins
+                .set(WindowPlugin {
+                    primary_window: Some(Window {
+                        fit_canvas_to_parent: true,
+                        ..default()
+                    }),
+                    ..default()
+                })
+                .set(AssetPlugin {
+                    watch_for_changes: ChangeWatcher::with_delay(Duration::from_secs_f32(0.5)),
+                    ..Default::default()
+                })
+                .set(ImagePlugin::default_nearest()),
+            Shape2dPlugin::default(),
+            WorldInspectorPlugin::new().run_if(input_toggle_active(false, KeyCode::F1)),
+            RngPlugin::default(),
+            SequentialActionsPlugin,
+        ))
+        .insert_resource(ClearColor(ui::colors::SCREEN_BACKGROUND_COLOR))
+        .insert_resource(DEFAULT_AMBIENT)
+        .add_plugins((
+            ToonMaterialPlugin,
+            LoadingScreenPlugin,
+            MainMenuPlugin,
+            CreditsPlugin,
+            InGamePlugin,
+            SceneSpawnerPlugin,
+            MainGameAssetPlugin,
+            UiPlugin,
+        ))
+        .add_state::<AppState>()
+        .register_type::<AppState>()
+        .register_type::<MainGameAssets>()
+        .add_plugins(
+            StateInspectorPlugin::<AppState>::default()
+                .run_if(input_toggle_active(false, KeyCode::F1)),
+        )
+        .add_systems(Startup, setup)
+        .add_systems(Update, fix_light)
         .run();
 }
 
-fn setup(
-    mut commands: Commands,
-    mut meshes: ResMut<Assets<Mesh>>,
-    mut materials: ResMut<Assets<ColorMaterial>>,
-) {
-    commands.spawn(Camera2dBundle::default());
-
-    // Circle
-    commands.spawn(MaterialMesh2dBundle {
-        mesh: meshes.add(shape::Circle::new(50.).into()).into(),
-        material: materials.add(ColorMaterial::from(Color::PURPLE)),
-        transform: Transform::from_translation(Vec3::new(-150., 0., 0.)),
+fn setup(mut commands: Commands) {
+    commands.spawn(Camera3dBundle {
+        transform: Transform::from_translation(Vec3::new(-2., 5., -5.))
+            .looking_at(Vec3::Y, Vec3::Y),
+        tonemapping: Tonemapping::AcesFitted,
         ..default()
     });
 
-    // Rectangle
-    commands.spawn(SpriteBundle {
-        sprite: Sprite {
-            color: Color::rgb(0.25, 0.25, 0.75),
-            custom_size: Some(Vec2::new(50.0, 100.0)),
+    commands.spawn(Camera2dBundle {
+        camera: Camera {
+            order: 1,
             ..default()
         },
-        transform: Transform::from_translation(Vec3::new(-50., 0., 0.)),
+        camera_2d: Camera2d {
+            clear_color: ClearColorConfig::None,
+        },
+        tonemapping: Tonemapping::AcesFitted,
         ..default()
     });
+}
 
-    // Quad
-    commands.spawn(MaterialMesh2dBundle {
-        mesh: meshes
-            .add(shape::Quad::new(Vec2::new(50., 100.)).into())
-            .into(),
-        material: materials.add(ColorMaterial::from(Color::LIME_GREEN)),
-        transform: Transform::from_translation(Vec3::new(50., 0., 0.)),
-        ..default()
-    });
-
-    // Hexagon
-    commands.spawn(MaterialMesh2dBundle {
-        mesh: meshes.add(shape::RegularPolygon::new(50., 6).into()).into(),
-        material: materials.add(ColorMaterial::from(Color::TURQUOISE)),
-        transform: Transform::from_translation(Vec3::new(150., 0., 0.)),
-        ..default()
-    });
+fn fix_light(
+    mut directional: Query<&mut DirectionalLight, Added<DirectionalLight>>,
+    mut point: Query<&mut PointLight, Added<PointLight>>,
+) {
+    for mut light in directional.iter_mut() {
+        if !light.shadows_enabled {
+            light.shadows_enabled = true;
+        }
+    }
+    for mut light in point.iter_mut() {
+        if !light.shadows_enabled {
+            light.shadows_enabled = true;
+        }
+    }
 }

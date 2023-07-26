@@ -1,0 +1,58 @@
+player_druid:
+  name: Hvari
+  health: 10
+  combat_actions:
+    - choice:
+        title: Attack **
+        content: "A simple attack"
+        fail: 2
+        success: 8
+        critical_success: 11
+        dice_pool:
+          - dice: D12
+      action_type: !Attack
+        base_damage: 2
+    - choice:
+        title: Shoot **
+        content: "A ranged"
+        fail: 3
+        success: 6
+        critical_success: 8
+        dice_pool:
+          - dice: D8
+      action_type: !Attack
+        base_damage: 2
+  scene:
+    gltf: "models/base-models.gltf"
+    scene: "Havri"
+    pallet:
+      - "textures/color-pallet-2.png"
+player_knight:
+  name: Torsin
+  health: 15
+  combat_actions:
+    - choice:
+        title: Attack **
+        content: "A simple attack"
+        fail: 3
+        success: 6
+        critical_success: 10
+        dice_pool:
+          - dice: D12
+      action_type: !Attack
+        base_damage: 3
+    - choice:
+        title: Shoot **
+        content: "A ranged"
+        fail: 2
+        success: 5
+        critical_success: 8
+        dice_pool:
+          - dice: D8
+      action_type: !Attack
+        base_damage: 2
+  scene:
+    gltf: "models/base-models.gltf"
+    scene: "Torsin"
+    pallet:
+      - "textures/color-pallet-2.png"

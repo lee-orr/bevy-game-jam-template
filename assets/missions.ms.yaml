@@ -1,0 +1,36 @@
+home_under_attack:
+  titles:
+    - To Spark a War
+    - A Home No More
+    - Beginnings
+  encounters:
+    - - save_towns_folk
+    - - the_hounds_arrive
+
+rescue:
+  titles:
+    - The Missing, The Lost
+    - The Kidnapping
+  encounters:
+    - - approaching_the_castle
+      - a_subtle_approach
+    - - the_gate
+      - the_campfire
+
+defend:
+  titles:
+    - A Troubled Town
+    - Ending the Seige
+  encounters:
+    - - nearly_here
+      - from_the_parapets
+    - - the_forst_flames
+      - the_fallen_gates
+
+chase_bandits:
+  titles:
+    - Bundits and Buffons
+    - No Room for Both of Us
+  encounters:
+    - - on_the_run
+      - and_stay_out

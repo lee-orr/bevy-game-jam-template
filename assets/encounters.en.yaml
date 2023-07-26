@@ -1,0 +1,121 @@
+save_towns_folk:
+  title: Save the Town's Folk
+  player_faction: Knights
+  location: village
+  introduction: Screams wake Torisn the Just - the village is under attack
+  challengers:
+    - - 1
+      - light_druid
+    - - 1
+      - heavy_druid
+
+the_hounds_arrive:
+  title: The Hounds Arrive
+  player_faction: Druids
+  location: forest
+  introduction: Midnight mayhem encompases Havri's village - and as Vessel of Justice, he must stop the culprits
+  challengers:
+    - - 1
+      - monster
+    - - 1
+      - light_knight
+
+approaching_the_castle:
+  title: Approaching the Fort
+  player_faction: Druids
+  location: mountain
+  introduction: Roumor has arrived of a fort holding the missing Ilasti family - and so Havri must investigate
+  challengers:
+    - - 2
+      - monster
+
+a_subtle_approach:
+  title: Torsin's Terrible Talent
+  player_faction: Knights
+  location: grass
+  introduction: Torsin was stealthily approaching a camp, holding the missing magister. He was doing so well - until his armour decided to squeak...
+  challengers:
+    - - 2
+      - heavy_druid
+
+the_gate:
+  title: The Gate Holds
+  player_faction: Druids
+  location: mountain
+  introduction: Havri arrives at the gate - here to demand the release of the Ilasti family... but things go south.
+  challengers:
+    - - 1
+      - light_knight
+    - - 1
+      - heavy_knight
+
+the_campfire:
+  title: The Campfire
+  player_faction: Knights
+  location: grass
+  introduction: The missing magister sits in chains by the camp fire - and Torsin will free him. After dealing with these....
+  challengers:
+    - - 3
+      - light_druid
+
+nearly_here:
+  title: Almost Here
+  player_faction: Druids
+  location: forest
+  introduction: Havri joined the scouts to search for approaching soldiers. And found a scouting party.
+  challengers:
+    - - 2
+      - light_knight
+    - - 1
+      - monster
+
+from_the_parapets:
+  title: From the Parapets
+  player_faction: Knights
+  location: village
+  introduction: Torisn is not one to wait - so despite the preparations on the parapets, he rushed out to greet the inconvenient guests...
+  challengers:
+    - - 2
+      - light_druid
+    - - 1
+      - heavy_druid
+
+the_forest_flames:
+  title: The Forest Flames
+  player_faction: Druids
+  location: forest
+  introduction: The forest is under attack - and Havri must respond
+  challengers:
+    - - 2
+      - light_knight
+    - - 1
+      - heavy_knight
+
+the_fallen_gates:
+  title: The Fallen Gates
+  player_faction: Knights
+  location: village
+  introduction: Torsin is all that stands between the town and the hordes...
+  challengers:
+    - - 1
+      - light_druid
+    - - 2
+      - heavy_druid
+
+on_the_run:
+  title: On the Run
+  player_faction: Druids
+  location: sand
+  introduction: Havri managed to surprise some knights, and now to make them run
+  challengers:
+    - - 2
+      - light_knight
+
+and_stay_out:
+  title: And Stay Out
+  player_faction: Knights
+  location: grass
+  introduction: Some Druids were stealing food from the town stores - and Torsin won't let that stand
+  challengers:
+    - - 2
+      - light_druid

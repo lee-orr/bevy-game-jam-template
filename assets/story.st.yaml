@@ -1,0 +1,14 @@
+title: The Ballad of the Just Two
+phases:
+  - min_missions: 1
+    max_missions: 1
+    simulatneous_missions: 1
+    missions:
+      - home_under_attack
+  - min_missions: 2
+    max_missions: 2
+    simulatneous_missions: 2
+    missions:
+      - rescue
+      - defend
+      - chase_bandits

@@ -1,17 +1,23 @@
 [package]
-name = "philosophical-zombies"
+name = "game-template"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bevy = { version = "0.10" }
-leafwing-input-manager = "0.9"
-bevy_proto = "0.10"
-iyes_progress = "0.8"
-bevy_ecs_markers = "1"
-spew = "0.2"
-bevy_common_assets = "0.6.0"
-bevy_asset_loader = "0.16"
-bevy_dolly = { git = "https://github.com/BlackPhlox/bevy_dolly", features = ["drivers"] }
+bevy = { version = "0.11", features = ["flac", "mp3"] }
+leafwing-input-manager = "0.10"
+bevy_common_assets = { version = "0.7.0", features = ["yaml"] }
+bevy_asset_loader = { version = "0.17", features = [
+    "standard_dynamic_assets",
+    "2d",
+] }
+bevy_vector_shapes = "0.5"
+console_error_panic_hook = "*"
+bevy-ui-dsl = "*"
+bevy-inspector-egui = "*"
+serde = "*"
+bevy_turborand = { version = "0.6", features = ["rand"] }
+bevy-ui-navigation = "0.27.0"
+bevy-sequential-actions = "0.8"
