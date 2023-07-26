@@ -19,5 +19,4 @@ bevy-ui-dsl = "*"
 bevy-inspector-egui = "*"
 serde = "*"
 bevy_turborand = { version = "0.6", features = ["rand"] }
-bevy-ui-navigation = "0.27.0"
-bevy-sequential-actions = "0.8"
+bevy-ui-navigation = "0.28.0"
