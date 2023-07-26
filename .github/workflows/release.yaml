@@ -25,7 +25,7 @@ jobs:
       - id: setup-build-name
         run: |
           NAME=$( sed -n 's/^name = "\(.*\)"/\1/p' < ./Cargo.toml )
-          echo "binary: $NAME"
+          echo "binary: _$NAME_"
           echo "BIN=$NAME" >> $GITHUB_OUTPUT
 
   # Build for wasm
@@ -35,7 +35,7 @@ jobs:
 
     steps:
       - run: |
-          echo "Binary is  ${{ needs.setup-build-name.outputs.binary}}"
+          echo "Binary is ${{ needs.setup-build-name.outputs.binary}}"
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@master
         with:
@@ -60,7 +60,7 @@ jobs:
       - name: Package as a zip
         working-directory: ./dist
         run: |
-          zip --recurse-paths ../ ${{ needs.setup-build-name.outputs.binary}}.zip .
+          zip --recurse-paths ../${{ needs.setup-build-name.outputs.binary}}.zip .
 
       - name: Upload binaries to artifacts
         uses: actions/upload-artifact@v3
@@ -95,7 +95,7 @@ jobs:
 
     steps:
       - run: |
-          echo "Binary is  ${{ needs.setup-build-name.outputs.binary}}"
+          echo "Binary is ${{ needs.setup-build-name.outputs.binary}}"
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@master
         with:
@@ -113,13 +113,13 @@ jobs:
       - name: Prepare package
         run: |
           mkdir linux
-          cp target/x86_64-unknown-linux-gnu/release/ ${{ needs.setup-build-name.outputs.binary}} linux/
+          cp target/x86_64-unknown-linux-gnu/release/${{ needs.setup-build-name.outputs.binary}} linux/
           cp -r assets linux/
 
       - name: Package as a zip
         working-directory: ./linux
         run: |
-          zip --recurse-paths ../ ${{ needs.setup-build-name.outputs.binary}}.zip .
+          zip --recurse-paths ../${{ needs.setup-build-name.outputs.binary}}.zip .
 
       - name: Upload binaries to artifacts
         uses: actions/upload-artifact@v3
@@ -144,7 +144,7 @@ jobs:
 
     steps:
       - run: |
-          echo "Binary is  ${{ needs.setup-build-name.outputs.binary}}"
+          echo "Binary is ${{ needs.setup-build-name.outputs.binary}}"
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@master
         with:
@@ -158,12 +158,12 @@ jobs:
       - name: Prepare package
         run: |
           mkdir windows
-          cp target/x86_64-pc-windows-msvc/release/ ${{ needs.setup-build-name.outputs.binary}}.exe windows/
+          cp target/x86_64-pc-windows-msvc/release/${{ needs.setup-build-name.outputs.binary}}.exe windows/
           cp -r assets windows/
 
       - name: Package as a zip
         run: |
-          Compress-Archive -Path windows/* -DestinationPath  ${{ needs.setup-build-name.outputs.binary}}.zip
+          Compress-Archive -Path windows/* -DestinationPath ${{ needs.setup-build-name.outputs.binary}}.zip
 
       - name: Upload binaries to artifacts
         uses: actions/upload-artifact@v3
@@ -188,7 +188,7 @@ jobs:
 
     steps:
       - run: |
-          echo "Binary is  ${{ needs.setup-build-name.outputs.binary}}"
+          echo "Binary is ${{ needs.setup-build-name.outputs.binary}}"
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@master
         with:
@@ -205,10 +205,10 @@ jobs:
 
       - name: Prepare Package
         run: |
-          mkdir -p  ${{ needs.setup-build-name.outputs.binary}}.app/Contents/MacOS
-          cp target/x86_64-apple-darwin/release/ ${{ needs.setup-build-name.outputs.binary}}  ${{ needs.setup-build-name.outputs.binary}}.app/Contents/MacOS/
-          cp -r assets  ${{ needs.setup-build-name.outputs.binary}}.app/Contents/MacOS/
-          hdiutil create -fs HFS+ -volname " ${{ needs.setup-build-name.outputs.binary}}" -srcfolder  ${{ needs.setup-build-name.outputs.binary}}.app  ${{ needs.setup-build-name.outputs.binary}}.dmg
+          mkdir -p ${{ needs.setup-build-name.outputs.binary}}.app/Contents/MacOS
+          cp target/x86_64-apple-darwin/release/${{ needs.setup-build-name.outputs.binary}} ${{ needs.setup-build-name.outputs.binary}}.app/Contents/MacOS/
+          cp -r assets ${{ needs.setup-build-name.outputs.binary}}.app/Contents/MacOS/
+          hdiutil create -fs HFS+ -volname " ${{ needs.setup-build-name.outputs.binary}}" -srcfolder ${{ needs.setup-build-name.outputs.binary}}.app ${{ needs.setup-build-name.outputs.binary}}.dmg
 
       - name: Upload binaries to artifacts
         uses: actions/upload-artifact@v3
@@ -233,7 +233,7 @@ jobs:
       should-upload: ${{ steps.check-env.outputs.has-itch-target }}
     steps:
       - run: |
-          echo "Binary is  ${{ needs.setup-build-name.outputs.binary}}"
+          echo "Binary is ${{ needs.setup-build-name.outputs.binary}}"
       - id: check-env
         run: |
           if [[ -z "$itch_target" ]]; then
@@ -298,5 +298,5 @@ jobs:
                 --fix-permissions \
                 --userversion="${{ env.release_version }}" \
                 builds/$channel/* \
-                ${{ env.itch_target }}:$channel
+               ${{ env.itch_target }}:$channel
           done
