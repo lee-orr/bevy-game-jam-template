@@ -2,7 +2,7 @@
 
 This is a simple bevy template providing scaffolding for creating a game jam game. It basically sets up some asset loading, menus, and some common crates for later use, as well as some VS Code tasks & Github Actions for building and deploying the game.
 
-To see a web build of this set up - you can check it out here: lee-orr.github.io/bevy-game-jam-template/
+To see a web build of this set up - you can check it out [here](https://lee-orr.github.io/bevy-game-jam-template/)
 
 ## Crates Used
 
