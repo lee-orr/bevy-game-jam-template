@@ -47,6 +47,7 @@ jobs:
 
       - name: Build
         run: |
+          chmod +x ./web-build.sh
           ./web-build.sh
 
       - name: Package as a zip
