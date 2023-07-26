@@ -1,7 +1,7 @@
 #!/bin/bash
 cd "$(dirname "$0")"
 
-NAME=${sed -n 's/^name = "\(.*\)"/\1/p' < ./Cargo.toml}
+NAME=$(sed -n 's/^name = "\(.*\)"/\1/p' < ./Cargo.toml)
 
 cargo build --release --target wasm32-unknown-unknown
 
