@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          NAME=${sed -n 's/^name = "\(.*\)"/\1/p' < ./Cargo.toml}
+          NAME=$( sed -n 's/^name = "\(.*\)"/\1/p' < ./Cargo.toml )
           echo "binary=$NAME" >> "$GITHUB_ENV"
   # Build for wasm
   release-wasm:
