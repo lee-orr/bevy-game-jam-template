@@ -22,7 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: |
+      - id: setup-build-name
+        run: |
           NAME=$( sed -n 's/^name = "\(.*\)"/\1/p' < ./Cargo.toml )
           echo "binary: $NAME"
           echo "BIN=$NAME" >> $GITHUB_OUTPUT
