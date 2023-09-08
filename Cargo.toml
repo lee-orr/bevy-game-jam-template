@@ -19,4 +19,16 @@ bevy-ui-dsl = "*"
 bevy-inspector-egui = "*"
 serde = "*"
 bevy_turborand = { version = "0.6", features = ["rand"] }
-bevy-ui-navigation = "0.28.0"
+bevy-ui-navigation = "0.31.0"
+
+dexterous_developer = "0.0.9"
+
+[lib]
+name = "game_lib"
+path = "src/lib.rs"
+crate-type = ["rlib", "dylib"]
+
+
+[[bin]]
+name = "game"
+path = "src/main.rs"

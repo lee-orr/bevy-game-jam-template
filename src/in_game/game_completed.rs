@@ -12,21 +12,28 @@ use crate::{
 };
 
 use super::game_state::GameState;
+use dexterous_developer::{
+    dexterous_developer_setup, ReloadableApp, ReloadableAppContents, ReloadableElementsSetup,
+};
 pub struct GameCompletedPlugin;
 
 impl Plugin for GameCompletedPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(OnEnter(GameState::Complete), setup)
-            .add_systems(OnExit(GameState::Complete), exit)
-            .add_systems(
-                Update,
-                (
-                    process_keyboard_input,
-                    (focused_button_activated.pipe(process_input)),
-                )
-                    .run_if(in_state(GameState::Complete)),
-            );
+        app.setup_reloadable_elements::<reloadable>();
     }
+}
+
+#[dexterous_developer_setup(game_completed)]
+fn reloadable(app: &mut ReloadableAppContents) {
+    app.reset_setup_in_state::<Screen, _, _>(GameState::Complete, setup)
+        .add_systems(
+            Update,
+            (
+                process_keyboard_input,
+                (focused_button_activated.pipe(process_input)),
+            )
+                .run_if(in_state(GameState::Complete)),
+        );
 }
 
 #[derive(Component)]

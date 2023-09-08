@@ -8,6 +8,6 @@ use crate::ui::{
 
 pub fn game_title(p: &mut UiChildBuilder<'_, '_, '_, '_>) -> Entity {
     node((span.nb(), primary_box_main.nb()), p, |p| {
-        text("My Game", (), main_text, p);
+        text("My Game!", (), main_text, p);
     })
 }

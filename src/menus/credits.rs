@@ -2,6 +2,9 @@ use bevy::{prelude::*, reflect::TypeUuid};
 use bevy_common_assets::yaml::YamlAssetPlugin;
 use bevy_inspector_egui::InspectorOptions;
 use bevy_ui_dsl::*;
+use dexterous_developer::{
+    dexterous_developer_setup, ReloadableApp, ReloadableAppContents, ReloadableElementsSetup,
+};
 use serde::Deserialize;
 
 use crate::{
@@ -23,13 +26,17 @@ impl Plugin for CreditsPlugin {
         app.register_type::<Credits>()
             .register_asset_reflect::<Credits>()
             .add_plugins(YamlAssetPlugin::<Credits>::new(&["cr.yaml"]))
-            .add_systems(OnEnter(AppState::Credits), setup)
-            .add_systems(OnExit(AppState::Credits), exit)
-            .add_systems(
-                Update,
-                (focused_button_activated.pipe(process_input)).run_if(in_state(AppState::Credits)),
-            );
+            .setup_reloadable_elements::<reloadable>();
     }
+}
+
+#[dexterous_developer_setup(credits)]
+fn reloadable(app: &mut ReloadableAppContents) {
+    app.reset_setup_in_state::<Screen, _, _>(AppState::Credits, setup)
+        .add_systems(
+            Update,
+            (focused_button_activated.pipe(process_input)).run_if(in_state(AppState::Credits)),
+        );
 }
 
 #[derive(Component)]
@@ -70,12 +77,6 @@ fn setup(
         });
     });
     commands.entity(r).insert(Screen);
-}
-
-fn exit(mut commands: Commands, query: Query<Entity, With<Screen>>) {
-    for item in query.iter() {
-        commands.entity(item).despawn_recursive();
-    }
 }
 
 fn process_input(In(focused): In<Option<Entity>>, mut commands: Commands) {

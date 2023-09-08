@@ -23,6 +23,9 @@ use self::{
     game_state::{GameState, PauseState},
     pause_screen::PausePlugin,
 };
+use dexterous_developer::{
+    dexterous_developer_setup, ReloadableApp, ReloadableAppContents, ReloadableElementsSetup,
+};
 pub struct InGamePlugin;
 
 impl Plugin for InGamePlugin {
@@ -34,14 +37,19 @@ impl Plugin for InGamePlugin {
                 StateInspectorPlugin::<GameState>::default()
                     .run_if(input_toggle_active(false, KeyCode::F1)),
             )
-            .add_systems(OnEnter(AppState::InGame), setup)
             .add_systems(OnExit(AppState::InGame), (exit, clear_audio))
             .add_systems(Update, (enable_audio).run_if(in_state(AppState::InGame)))
-            .add_systems(
-                Update,
-                run_in_game_update.run_if(in_state(PauseState::None)),
-            );
+            .setup_reloadable_elements::<reloadable>();
     }
+}
+
+#[dexterous_developer_setup(in_game)]
+fn reloadable(app: &mut ReloadableAppContents) {
+    app.reset_setup_in_state::<InGame, _, _>(AppState::InGame, setup)
+        .add_systems(
+            Update,
+            run_in_game_update.run_if(in_state(PauseState::None)),
+        );
 }
 
 #[derive(Component)]

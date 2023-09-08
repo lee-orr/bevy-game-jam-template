@@ -4,13 +4,21 @@ use bevy::prelude::*;
 use bevy_vector_shapes::{prelude::ShapePainter, shapes::DiscPainter};
 
 use crate::{app_state::AppState, ui::colors};
+use dexterous_developer::{
+    dexterous_developer_setup, ReloadableApp, ReloadableAppContents, ReloadableElementsSetup,
+};
 
 pub struct LoadingScreenPlugin;
 
 impl Plugin for LoadingScreenPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Update, draw_loading.run_if(in_state(AppState::LoadingMenu)));
+        app.setup_reloadable_elements::<reloadable>();
     }
+}
+
+#[dexterous_developer_setup(loading)]
+fn reloadable(app: &mut ReloadableAppContents) {
+    app.add_systems(Update, draw_loading.run_if(in_state(AppState::LoadingMenu)));
 }
 
 const LOADING_ANIMATION_SPEED: f32 = 5.;

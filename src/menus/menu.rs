@@ -11,19 +11,26 @@ use crate::{
         intermediary_node_bundles::*,
     },
 };
+use dexterous_developer::{
+    dexterous_developer_setup, ReloadableApp, ReloadableAppContents, ReloadableElementsSetup,
+};
 
 use super::game_title;
 pub struct MainMenuPlugin;
 
 impl Plugin for MainMenuPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(OnEnter(AppState::MainMenu), setup)
-            .add_systems(OnExit(AppState::MainMenu), exit)
-            .add_systems(
-                Update,
-                (focused_button_activated.pipe(process_input)).run_if(in_state(AppState::MainMenu)),
-            );
+        app.setup_reloadable_elements::<reloadable>();
     }
+}
+
+#[dexterous_developer_setup(main_menu)]
+fn reloadable(app: &mut ReloadableAppContents) {
+    app.reset_setup_in_state::<Screen, _, _>(AppState::MainMenu, setup)
+        .add_systems(
+            Update,
+            (focused_button_activated.pipe(process_input)).run_if(in_state(AppState::MainMenu)),
+        );
 }
 
 #[derive(Component)]
@@ -69,12 +76,6 @@ fn setup(mut commands: Commands, _assets: Res<MainGameAssets>, asset_server: Res
     commands
         .entity(credits_button.unwrap())
         .insert(Buttons::Credits);
-}
-
-fn exit(mut commands: Commands, query: Query<Entity, With<Screen>>) {
-    for item in query.iter() {
-        commands.entity(item).despawn_recursive();
-    }
 }
 
 fn process_input(
