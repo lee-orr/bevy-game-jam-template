@@ -10,7 +10,6 @@ use std::time::Duration;
 use app_state::AppState;
 use assets::{MainGameAssetPlugin, MainGameAssets};
 use bevy::{
-    asset::ChangeWatcher,
     core_pipeline::{clear_color::ClearColorConfig, tonemapping::Tonemapping},
     input::common_conditions::input_toggle_active,
     prelude::*,
@@ -43,10 +42,6 @@ fn bevy_main(initial: impl InitialPlugins) {
                         ..default()
                     }),
                     ..default()
-                })
-                .set(AssetPlugin {
-                    watch_for_changes: ChangeWatcher::with_delay(Duration::from_secs_f32(0.5)),
-                    ..Default::default()
                 })
                 .set(ImagePlugin::default_nearest()),
             Shape2dPlugin::default(),

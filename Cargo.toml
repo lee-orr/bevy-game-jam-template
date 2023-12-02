@@ -6,22 +6,22 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bevy = { version = "0.11", features = ["flac", "mp3"] }
-leafwing-input-manager = "0.10"
-bevy_common_assets = { version = "0.7.0", features = ["yaml"] }
-bevy_asset_loader = { version = "0.17", features = [
+bevy = { version = "0.12", features = ["flac", "mp3", "file_watcher"] }
+leafwing-input-manager = "0.11"
+bevy_common_assets = { version = "0.8.0", features = ["yaml"] }
+bevy_asset_loader = { version = "0.18", features = [
     "standard_dynamic_assets",
     "2d",
 ] }
-bevy_vector_shapes = "0.5"
+bevy_vector_shapes = "0.6"
 console_error_panic_hook = "*"
-bevy-ui-dsl = "*"
-bevy-inspector-egui = "*"
-serde = "*"
-bevy_turborand = { version = "0.6", features = ["rand"] }
-bevy-ui-navigation = "0.31.0"
+bevy-ui-dsl = "0.7"
+bevy-inspector-egui = "0.21"
+serde = "1"
+bevy_turborand = { version = "0.7", features = ["rand"] }
+bevy-ui-navigation = "0.33.0"
 
-dexterous_developer = "0.0.11"
+dexterous_developer = "0.0.12"
 
 [lib]
 name = "game_lib"

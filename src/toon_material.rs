@@ -2,6 +2,7 @@ use bevy::{
     prelude::*,
     reflect::{TypePath, TypeUuid},
     render::render_resource::*,
+    asset::*
 };
 
 pub struct ToonMaterialPlugin;
@@ -12,7 +13,7 @@ impl Plugin for ToonMaterialPlugin {
     }
 }
 
-#[derive(AsBindGroup, TypeUuid, TypePath, Debug, Clone)]
+#[derive(AsBindGroup, TypeUuid, TypePath, Debug, Clone, Asset)]
 #[uuid = "dfaf271e-ec36-4fdd-a17d-0c0c79964926"]
 pub struct ToonMaterial {
     #[texture(0)]

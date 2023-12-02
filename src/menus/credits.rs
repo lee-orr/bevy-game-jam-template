@@ -42,7 +42,7 @@ fn reloadable(app: &mut ReloadableAppContents) {
 #[derive(Component)]
 struct Screen;
 
-#[derive(Reflect, InspectorOptions, Deserialize, TypeUuid, Default)]
+#[derive(Reflect, InspectorOptions, Deserialize, TypeUuid, Default, Asset)]
 #[uuid = "cdac5b3f-215c-4728-afe4-897f514ecf42"]
 
 pub struct Credits(Vec<String>);
